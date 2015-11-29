@@ -4,11 +4,20 @@ const PropTypes = React.PropTypes;
 
 const DrawableCanvas = React.createClass({
   propTypes: {
-    // TODO:
+    brushColor: PropTypes.string,
+    lineWidth: PropTypes.number,
+    canvasStyle: PropTypes.shape({
+      backgroundColor: PropTypes.string
+    })
   },
-
   getDefaultProps() {
-    // TODO:
+    return {
+      brushColor: "#000000",
+      lineWidth: 4,
+      canvasStyle: {
+        backgroundColor: "##FFFFFF"
+      }
+    };
   },
   getInitialState(){
     return {
@@ -68,8 +77,8 @@ const DrawableCanvas = React.createClass({
     });
   },
   draw(lX, lY, cX, cY){
-    this.state.context.strokeStyle=this.props.ops.brushColor;
-    this.state.context.lineWidth=this.props.ops.lineWidth;
+    this.state.context.strokeStyle=this.props.brushColor;
+    this.state.context.lineWidth=this.props.lineWidth;
     this.state.context.moveTo(lX,lY);
     this.state.context.lineTo(cX,cY);
     this.state.context.stroke();
@@ -77,7 +86,7 @@ const DrawableCanvas = React.createClass({
 
   render() {
     return (
-      <canvas style={this.props.ops.canvasStyle}
+      <canvas style={this.props.canvasStyle}
         onMouseDown={this.handleOnMouseDown}
         onMouseMove={this.handleOnMouseMove}
         onMouseUp={this.handleonMouseUp}

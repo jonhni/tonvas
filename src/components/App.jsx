@@ -45,19 +45,19 @@ const App = React.createClass({
       <div>
         <div className="canvasWrapper">
           <div className="canvas">
-            <DrawableCanvas ops={ops} />
+            <DrawableCanvas {...ops} />
           </div>
           <div className="canvas">
-            <DrawableCanvas ops={ops1} />
+            <DrawableCanvas {...ops1} />
           </div>
           <div className="canvas">
-              <DrawableCanvas ops={ops2} />
+              <DrawableCanvas {...ops2} />
           </div>
           <div className="canvas">
-              <DrawableCanvas ops={ops3} />
+              <DrawableCanvas {...ops3} />
           </div>
         </div>
-        <DrawableCanvas ops={ops4} />
+        <DrawableCanvas {...ops4}/>
       </div>
 
     );
