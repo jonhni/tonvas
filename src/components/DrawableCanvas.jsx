@@ -22,8 +22,10 @@ const DrawableCanvas = React.createClass({
   componentDidMount(){
     let canvas = ReactDOM.findDOMNode(this);
 
-    canvas.width = this.props.ops.width;
-    canvas.height = this.props.ops.height;
+    canvas.style.width='100%';
+    canvas.style.height='100%';
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
 
     let ctx = canvas.getContext('2d');
     let offsetleft = canvas.getBoundingClientRect();
@@ -52,7 +54,7 @@ const DrawableCanvas = React.createClass({
       let lastY = this.state.lastY;
       let currentX = e.clientX - rect.left;
       let currentY = e.clientY - rect.top;
-      
+
       this.draw(lastX, lastY, currentX, currentY);
       this.setState({
         lastX: currentX,

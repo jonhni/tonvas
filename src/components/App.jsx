@@ -7,8 +7,6 @@ const App = React.createClass({
     let ops = {
       brushColor: "#800909",
       lineWidth: 4,
-      width:400,
-      height:400,
       canvasStyle: {
         backgroundColor: "#00FFDC"
       }
@@ -16,8 +14,6 @@ const App = React.createClass({
     let ops1= {
       brushColor: "#0033cc",
       lineWidth: 4,
-      width:200,
-      height:200,
       canvasStyle: {
         backgroundColor: "#00ff00"
       }
@@ -25,8 +21,6 @@ const App = React.createClass({
     let ops2= {
       brushColor: "#00ffff",
       lineWidth: 4,
-      width:300,
-      height:300,
       canvasStyle: {
         backgroundColor: "#ffff00"
       }
@@ -34,14 +28,21 @@ const App = React.createClass({
     let ops3= {
       brushColor: "#ffffff",
       lineWidth: 4,
-      width:300,
-      height:300,
       canvasStyle: {
         backgroundColor: "#ff66ff"
       }
     };
+    let ops4= {
+      brushColor: "#333300",
+      lineWidth: 4,
+      canvasStyle: {
+        backgroundColor: "#ff0000"
+      }
+    };
+
 
     return (
+      <div>
         <div className="canvasWrapper">
           <div className="canvas">
             <DrawableCanvas ops={ops} />
@@ -56,6 +57,9 @@ const App = React.createClass({
               <DrawableCanvas ops={ops3} />
           </div>
         </div>
+        <DrawableCanvas ops={ops4} />
+      </div>
+
     );
   }
 });
