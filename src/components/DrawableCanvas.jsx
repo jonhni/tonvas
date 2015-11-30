@@ -1,13 +1,17 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const PropTypes = React.PropTypes;
-
+let myName = [];
 const DrawableCanvas = React.createClass({
   propTypes: {
     brushColor: PropTypes.string,
     lineWidth: PropTypes.number,
     canvasStyle: PropTypes.shape({
       backgroundColor: PropTypes.string
+    }),
+    coordinates:  PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number
     })
   },
   getDefaultProps() {
@@ -16,6 +20,10 @@ const DrawableCanvas = React.createClass({
       lineWidth: 4,
       canvasStyle: {
         backgroundColor: "##FFFFFF"
+      },
+      coordinates: {
+        x: 0,
+        y: 0
       }
     };
   },
@@ -25,14 +33,15 @@ const DrawableCanvas = React.createClass({
       context: null,
       drawing: false,
       lastX: 0,
-      lastY: 0
+      lastY: 0,
+      coordinates: this.props.coordinates
     };
   },
   componentDidMount(){
     let canvas = ReactDOM.findDOMNode(this);
 
-    canvas.style.width='100%';
-    canvas.style.height='100%';
+    canvas.style.width= '100%';
+    canvas.style.height= '100%';
     canvas.width  = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 
@@ -43,7 +52,9 @@ const DrawableCanvas = React.createClass({
       context: ctx
     });
   },
-
+  componentWillReceiveProps: function(nextProps) {
+    this.autoDraw(this.props.coordinates, nextProps.coordinates)
+  },
   handleOnMouseDown(e){
     let rect = this.state.canvas.getBoundingClientRect();
     this.state.context.beginPath();
@@ -75,6 +86,14 @@ const DrawableCanvas = React.createClass({
     this.setState({
       drawing: false
     });
+  },
+  autoDraw(coordinates, newCoordinates){
+    this.state.context.strokeStyle = this.props.brushColor;
+    this.state.context.lineWidth = this.props.lineWidth;
+    this.state.context.moveTo(coordinates.x, coordinates.y);
+    this.state.context.lineTo(newCoordinates.x, newCoordinates.y);
+    this.state.context.stroke();
+
   },
   draw(lX, lY, cX, cY){
     this.state.context.strokeStyle=this.props.brushColor;
