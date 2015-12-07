@@ -1,5 +1,5 @@
 # tonvas
-Drawable canvas
+So far, only free-hand drawing and basic animations on canvas
 
 
 ```bash
